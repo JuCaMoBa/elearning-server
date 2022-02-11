@@ -16,6 +16,10 @@
   "dependencies": {
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "morgan": "^1.10.0",
+    "strip-final-newline": "^3.0.0",
+    "uuid": "^8.3.2",
+    "winston": "^3.5.1"
   }
 }
