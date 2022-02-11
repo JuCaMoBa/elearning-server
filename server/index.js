@@ -1,5 +1,6 @@
 const express = require("express");
 const { logger, requestId, requestLog } = require("./config/logger");
+const api = require("./api/v1");
 
 // Express defination
 const app = express();
@@ -8,9 +9,7 @@ const app = express();
 app.use(requestId);
 app.use(requestLog);
 
-app.get("/", (req, res, next) => {
-  res.send("hello Word");
-});
+app.use("/api", api);
 
 // Handler Error route not found
 app.use((req, res, next) => {
