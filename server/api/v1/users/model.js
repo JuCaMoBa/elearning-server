@@ -117,6 +117,5 @@ const model = mongoose.model("user", user);
 module.exports = {
   Model: model,
   fields,
-  virtuals,
   sanitizers,
 };
