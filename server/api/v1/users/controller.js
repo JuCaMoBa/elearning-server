@@ -75,15 +75,15 @@ exports.signup = async (req, res, next) => {
       },
     });
 
-    const { firstName, email } = data;
-    mail({
-      email,
-      subject: "Welcome",
-      template: "server/utils/email/templates/welcomeEmail.html",
-      data: {
-        firstName,
-      },
-    });
+    // const { firstName, email } = data;
+    // mail({
+    //   email,
+    //   subject: "Welcome",
+    //   template: "server/utils/email/templates/welcomeEmail.html",
+    //   data: {
+    //     firstName,
+    //   },
+    // });
   } catch (error) {
     next(error);
   }
