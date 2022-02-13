@@ -1,4 +1,7 @@
 const express = require("express");
+const cors = require("cors");
+
+const { cors: corsConfig } = require("./config");
 const { logger, requestId, requestLog } = require("./config/logger");
 const api = require("./api/v1");
 
@@ -6,8 +9,16 @@ const api = require("./api/v1");
 const app = express();
 
 // Middlewares
+app.use(
+  cors({
+    origin: corsConfig.origin,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Accept", "Content-Type", "Authorization"],
+  })
+);
 app.use(requestId);
 app.use(requestLog);
+app.use(express.json()); // parse application/json
 
 app.use("/api", api);
 

@@ -13,6 +13,9 @@ const config = {
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
   },
+  cors: {
+    origin: process.env.ACCESS_CONTROL_ALLOW_ORIGIN,
+  },
 };
 
 module.exports = config;
