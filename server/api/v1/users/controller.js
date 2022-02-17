@@ -108,6 +108,7 @@ exports.update = async (req, res, next) => {
   const { body = {}, decoded } = req;
   const { id } = decoded;
   let { password, confirmPassword } = body;
+  let photo = "";
 
   try {
     const message = "confirm password do not match with password";
