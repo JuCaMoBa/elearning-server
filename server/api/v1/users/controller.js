@@ -1,6 +1,7 @@
 const { hash } = require("bcryptjs");
 const { Model, virtuals } = require("./model");
 const { signToken } = require("../auth");
+const uploadToCloudinary = require("../../../utils/uploadToCloudinary");
 
 exports.signin = async (req, res, next) => {
   const { body = {} } = req;
@@ -121,6 +122,45 @@ exports.update = async (req, res, next) => {
       }
       password = await hash(password, 10);
       confirmPassword = await hash(confirmPassword, 10);
+    }
+    if (req.files) {
+      photo = await uploadToCloudinary({
+        file: req.files.file,
+        path: "renta-car-profile",
+        allowedExts: ["jpg", "jpeg", "png"],
+      });
+      const data = await Model.findOneAndUpdate(
+        { _id: id },
+        {
+          ...body,
+          password,
+          confirmPassword,
+          photo,
+        },
+        {
+          new: true,
+        }
+      );
+
+      res.json({
+        data,
+      });
+    } else {
+      const data = await Model.findOneAndUpdate(
+        { _id: id },
+        {
+          ...body,
+          password,
+          confirmPassword,
+        },
+        {
+          new: true,
+        }
+      );
+
+      res.json({
+        data,
+      });
     }
   } catch (error) {
     next(error);
