@@ -127,7 +127,7 @@ exports.update = async (req, res, next) => {
     if (req.files) {
       photo = await uploadToCloudinary({
         file: req.files.file,
-        path: "renta-car-profile",
+        path: "elearning",
         allowedExts: ["jpg", "jpeg", "png"],
       });
       const data = await Model.findOneAndUpdate(
