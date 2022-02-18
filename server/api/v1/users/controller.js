@@ -167,3 +167,28 @@ exports.update = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.updatePhoto = async (req, res, next) => {
+  const { decoded } = req;
+  const { id } = decoded;
+  let photo = "";
+  if (req.files.file) {
+    photo = await uploadToCloudinary({
+      file: req.files.file,
+      path: 'elearning"',
+      allowedExts: ["jpg", "jpeg", "png"],
+    });
+  }
+  const data = await Model.findOneAndUpdate(
+    { _id: id },
+    {
+      photo,
+    },
+    {
+      new: true,
+    }
+  );
+  res.json({
+    data,
+  });
+};

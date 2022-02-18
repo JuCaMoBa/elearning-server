@@ -23,4 +23,9 @@ router
   .put(auth, controller.update)
   .patch(auth, controller.update);
 
+router
+  .route("/profile/photo")
+  .put(auth, controller.updatePhoto)
+  .patch(auth, controller.updatePhoto);
+
 module.exports = router;
