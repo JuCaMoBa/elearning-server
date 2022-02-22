@@ -171,18 +171,11 @@ exports.update = async (req, res, next) => {
 exports.updatePhoto = async (req, res, next) => {
   const { decoded } = req;
   const { id } = decoded;
-  let photo = "";
-  if (req.files.file) {
-    photo = await uploadToCloudinary({
-      file: req.files.file,
-      path: 'elearning"',
-      allowedExts: ["jpg", "jpeg", "png"],
-    });
-  }
+  console.log("estoy aqui", req.body);
   const data = await Model.findOneAndUpdate(
     { _id: id },
     {
-      photo,
+      photo: req.body.url,
     },
     {
       new: true,
