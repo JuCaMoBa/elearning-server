@@ -10,7 +10,6 @@ const sanitizers = [
   body("password").escape(),
   body("confirmPassword").escape(),
   body("country").escape(),
-  body("about").escape(),
   body("cellphone").escape(),
   body("photo").escape(),
 ];
@@ -56,11 +55,6 @@ const fields = {
     maxLength: 256,
   },
   country: {
-    type: String,
-    trim: true,
-    maxLength: 128,
-  },
-  about: {
     type: String,
     trim: true,
     maxLength: 128,
