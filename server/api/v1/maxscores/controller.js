@@ -22,6 +22,28 @@ exports.parentId = async (req, res, next) => {
   }
 };
 
+exports.id = async (req, res, next) => {
+  const { params = {} } = req;
+  const { id = "" } = params;
+
+  try {
+    const data = await Model.findById(id);
+    if (!data) {
+      const message = `${Model.modelName} not found`;
+      next({
+        message,
+        statusCode: 404,
+        level: "warn",
+      });
+    } else {
+      req.doc = data;
+      next();
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.create = async (req, res, next) => {
   const { body = {}, decoded } = req;
   const { id } = decoded;
