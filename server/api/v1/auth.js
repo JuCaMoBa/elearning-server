@@ -37,3 +37,23 @@ exports.auth = (req, res, next) => {
     });
   }
 };
+
+exports.owner = (req, res, next) => {
+  const { decoded, doc } = req;
+  const { id } = decoded;
+  const {
+    user: { id: userId },
+  } = doc;
+
+  if (id !== userId) {
+    const message = "Forbidden";
+    const statusCode = 403;
+
+    next({
+      message,
+      statusCode,
+    });
+  } else {
+    next();
+  }
+};
