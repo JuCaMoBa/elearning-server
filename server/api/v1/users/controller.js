@@ -171,7 +171,6 @@ exports.update = async (req, res, next) => {
 exports.updatePhoto = async (req, res, next) => {
   const { decoded } = req;
   const { id } = decoded;
-  console.log("estoy aqui", req.body);
   const data = await Model.findOneAndUpdate(
     { _id: id },
     {
