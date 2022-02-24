@@ -8,14 +8,15 @@ const router = express.Router({
 });
 
 /*
- * /api/users/maxscores      POST   - Create a new Score
- * /api/users/maxscores      GET    - Get a Score
- * /api/users/maxscores/:id  PUT    - Update a Score
- * /api/users/maxscores/:id  DELETE - Delete a Score
+ * /api/maxscores      POST   - Create a new Score
+ * /api/maxscores      GET    - Get a Score
+ * /api/maxscores/:id  PUT    - Update a Score
+ * /api/maxscores/:id  DELETE - Delete a Score
  */
 
 router
   .route("/")
+  .get(controller.parentId, controller.all)
   .post(controller.parentId, auth, sanitizers, controller.create);
 
 router.param("id", controller.id);

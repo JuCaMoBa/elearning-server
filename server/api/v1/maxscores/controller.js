@@ -1,5 +1,8 @@
 const { Model: User } = require("../users/model");
-const { Model, fields, references, virtuals } = require("./model");
+const { Model, references } = require("./model");
+const { filterByNested } = require("../../../utils/utils");
+
+const referencesNames = [...Object.getOwnPropertyNames(references)];
 
 exports.parentId = async (req, res, next) => {
   const { params = {} } = req;
@@ -39,6 +42,20 @@ exports.id = async (req, res, next) => {
       req.doc = data;
       next();
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.all = async (req, res, next) => {
+  const { params } = req;
+  const { filters, populate } = filterByNested(params, referencesNames);
+  try {
+    const dataMaths = await Model.find(filters).populate(populate);
+
+    res.json({
+      dataMaths,
+    });
   } catch (error) {
     next(error);
   }

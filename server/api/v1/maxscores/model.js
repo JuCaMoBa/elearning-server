@@ -28,9 +28,9 @@ const fields = {
 };
 
 const references = {
-  users: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "users",
+    ref: "user",
     required: true,
   },
 };
