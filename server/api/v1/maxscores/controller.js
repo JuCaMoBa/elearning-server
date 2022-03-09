@@ -28,10 +28,14 @@ exports.parentId = async (req, res, next) => {
 exports.id = async (req, res, next) => {
   const { params = {} } = req;
   const { id = "" } = params;
-
   try {
-    const data = await Model.findById(id);
-    if (!data) {
+    const data1 = await Model.find({ user: id }).sort({ math: -1 }).limit(1);
+    const data2 = await Model.find({ user: id }).sort({ history: -1 }).limit(1);
+    const data3 = await Model.find({ user: id }).sort({ science: -1 }).limit(1);
+    const data4 = await Model.find({ user: id })
+      .sort({ geography: -1 })
+      .limit(1);
+    if (!data1 || !data2 || !data3 || !data4) {
       const message = `${Model.modelName} not found`;
       next({
         message,
@@ -39,7 +43,7 @@ exports.id = async (req, res, next) => {
         level: "warn",
       });
     } else {
-      req.doc = data;
+      req.doc = { data1, data2, data3, data4 };
       next();
     }
   } catch (error) {
@@ -84,7 +88,6 @@ exports.create = async (req, res, next) => {
 
 exports.read = async (req, res, next) => {
   const { doc = {} } = req;
-
   res.json({
     data: doc,
   });
