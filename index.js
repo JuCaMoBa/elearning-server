@@ -3,7 +3,7 @@ const app = require("./server");
 const config = require("./server/config");
 const { connect } = require("./server/database");
 
-const { port, database, hostname } = config;
+const { port, database } = config;
 
 // Database
 connect({
@@ -15,6 +15,6 @@ connect({
 
 const server = http.createServer(app);
 
-server.listen(port, hostname, () => {
-  console.log(`server running in http://${hostname}:${port}`);
+server.listen(port, () => {
+  console.log(`server running in http://127.0.0.1:${port}`);
 });
