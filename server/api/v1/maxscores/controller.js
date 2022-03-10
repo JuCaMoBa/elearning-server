@@ -29,7 +29,7 @@ exports.id = async (req, res, next) => {
   const { params = {} } = req;
   const { id = "" } = params;
   try {
-    const data1 = await Model.find({ user: id }).sort({ math: -1 }).limit(1);
+    const data1 = await Model.find({ user: id }).sort({ maths: -1 }).limit(1);
     const data2 = await Model.find({ user: id }).sort({ history: -1 }).limit(1);
     const data3 = await Model.find({ user: id }).sort({ science: -1 }).limit(1);
     const data4 = await Model.find({ user: id })
